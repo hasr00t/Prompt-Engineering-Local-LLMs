@@ -1,0 +1,97 @@
+================================================================
+  PENETRATION TEST ENGAGEMENT NOTES
+  CONFIDENTIAL - FOR AUTHORIZED TESTERS ONLY
+================================================================
+
+Client:            Initech Corporation
+Engagement Type:   Internal Network Penetration Test (Assumed Breach)
+Engagement ID:     INITECH-2026-0042
+Lead Tester:       [Your Name]
+Start Date:        2026-07-28
+End Date:          2026-08-08
+Report Due:        2026-08-15
+
+================================================================
+SCOPE
+================================================================
+
+Network Range:     10.10.0.0/16 (internal network)
+Location:          On-site / VPN (assumed breach starting position)
+Starting Point:    Unprivileged workstation on VLAN 10 (10.10.1.0/24)
+
+================================================================
+RULES OF ENGAGEMENT
+================================================================
+
+- Testing window: Business hours only (Mon-Fri, 08:00-18:00 CT)
+- No denial-of-service attacks or intentional service disruption
+- No data exfiltration of actual client data (screenshot evidence only)
+- No physical security testing (out of scope)
+- All findings must be reported with business context and impact
+- Emergency contact: James Brennan, IT Director — (555) 814-2290
+- Notify client POC before any exploitation attempt on production systems
+
+================================================================
+HOST NOTES: 10.10.14.22 (appserv-legacy-03)
+================================================================
+
+Hostname:          appserv-legacy-03.initech.local
+OS:                Debian 11 (Bullseye)
+Function:          Legacy inventory management application server
+Department:        Warehouse Operations
+Criticality:       Medium (business operations depend on it during shifts)
+
+Client-provided context:
+  "This server runs a legacy inventory management system. It was supposed
+  to be migrated to SSH last quarter but the migration stalled. The
+  inventory app requires telnet for its terminal-based interface. Server
+  is accessed by 3 warehouse staff."
+
+Nessus scan findings on this host:
+  - [CRITICAL] CVE-2026-24061: GNU inetutils telnetd auth bypass (port 23/tcp)
+  - [HIGH]    FTP anonymous login enabled (port 21/tcp) — writable upload dir
+  - [HIGH]    Outdated OpenSSL version (1.0.2k) — multiple known CVEs
+  - [MEDIUM]  No disk encryption detected (LUKS not configured)
+  - [LOW]     SSH password authentication enabled (port 22/tcp)
+  - [INFO]    NTP synchronized with internal time server
+
+Additional observations:
+  - The telnet service banner shows GNU inetutils 2.5
+  - FTP anonymous access exposes /var/ftp/pub with inventory export CSVs
+  - The server is on the same VLAN as other warehouse infrastructure
+  - No host-based firewall rules observed (iptables policy ACCEPT)
+  - Cron job exports inventory data to FTP nightly at 02:00
+
+================================================================
+DOMAIN / LATERAL MOVEMENT STATUS
+================================================================
+
+- Domain admin was NOT achieved through this host
+- The host is domain-joined but the telnet auth bypass yields local root
+- No cached domain admin credentials found on this host
+- Potential pivot: same VLAN includes 10.10.14.10 (warehouse-dc01)
+- Kerberoasting yielded 3 SPN hashes — cracking in progress
+
+================================================================
+TESTING LOG (appserv-legacy-03)
+================================================================
+
+2026-07-28 09:47  Nessus scan completed. CVE-2026-24061 flagged critical.
+2026-07-28 10:15  Manual verification of telnet auth bypass — confirmed.
+2026-07-28 10:18  Root shell obtained via NEW_ENVIRON technique.
+2026-07-28 10:22  Collected /etc/shadow, /etc/passwd for evidence.
+2026-07-28 10:30  Enumerated local services, cron jobs, network connections.
+2026-07-28 10:45  Checked for domain credential material — none found.
+2026-07-28 11:00  Documented findings, exited system. No changes made.
+
+================================================================
+NOTES FOR REPORT WRITING
+================================================================
+
+- Frame the telnet finding around the failed SSH migration project
+- Emphasize the trivial exploitability (no tools required, public PoC)
+- Note that CISA KEV listing means federal remediation deadline applies
+- Business impact: warehouse operations disruption, inventory data exposure
+- Recommend: immediate SSH migration, disable telnet, segment warehouse VLAN
+- The FTP anon finding compounds the risk (inventory data already exposed)
+- Three warehouse staff using telnet = credentials transmitted in cleartext daily

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Injection Challenge</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e17;
+            color: #c0c8d8;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #111827;
+            border-bottom: 1px solid #1e40af;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            font-size: 1.2rem;
+            color: #60a5fa;
+            letter-spacing: 1px;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        label {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        select {
+            background: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        select:focus { outline: none; border-color: #1e40af; }
+        button {
+            background: #1e40af;
+            color: #e5e7eb;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #2563eb; }
+        #clear-btn { background: #991b1b; }
+        #clear-btn:hover { background: #b91c1c; }
+        #chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 6px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .message.user {
+            align-self: flex-end;
+            background: #1e3a5f;
+            border: 1px solid #1e40af;
+            color: #bfdbfe;
+        }
+        .message.assistant {
+            align-self: flex-start;
+            background: #1a1a2e;
+            border: 1px solid #374151;
+            color: #d1d5db;
+        }
+        .message-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        .message.user .message-label { color: #60a5fa; }
+        .message.assistant .message-label { color: #34d399; }
+        .typing-indicator {
+            align-self: flex-start;
+            color: #6b7280;
+            font-style: italic;
+            font-size: 0.85rem;
+            padding: 10px 14px;
+        }
+        #input-area {
+            background: #111827;
+            border-top: 1px solid #1e40af;
+            padding: 14px 24px;
+            display: flex;
+            gap: 10px;
+        }
+        #user-input {
+            flex: 1;
+            background: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: none;
+        }
+        #user-input:focus { outline: none; border-color: #1e40af; }
+        #send-btn {
+            padding: 10px 24px;
+            font-size: 0.9rem;
+        }
+        .welcome {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 40px;
+            line-height: 1.8;
+        }
+        .welcome strong { color: #60a5fa; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>// PROMPT INJECTION CHALLENGE</h1>
+    <div class="controls">
+        <label for="level-select">Level:</label>
+        <select id="level-select">
+            <option value="1">Level 1 - No Defenses</option>
+            <option value="2">Level 2 - Deflection</option>
+            <option value="3">Level 3 - Keyword Filters</option>
+            <option value="4">Level 4 - Identity Lock</option>
+            <option value="5">Level 5 - Anti-Roleplay</option>
+            <option value="6">Level 6 - Decoy Layers</option>
+        </select>
+        <button id="clear-btn">Clear Chat</button>
+    </div>
+</header>
+
+<div id="chat-area">
+    <div class="welcome">
+        <p>Welcome to the <strong>Prompt Injection Challenge</strong>.</p>
+        <p>Each level hides a secret password in the system prompt.</p>
+        <p>Your goal: extract it. The defenses get harder each level.</p>
+        <p>Select a level above and start chatting.</p>
+    </div>
+</div>
+
+<div id="input-area">
+    <textarea id="user-input" rows="1" placeholder="Type your message..."></textarea>
+    <button id="send-btn">Send</button>
+</div>
+
+<script>
+    const chatArea = document.getElementById('chat-area');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const levelSelect = document.getElementById('level-select');
+    let sending = false;
+
+    function addMessage(role, content) {
+        // Remove welcome message if present
+        const welcome = chatArea.querySelector('.welcome');
+        if (welcome) welcome.remove();
+
+        const div = document.createElement('div');
+        div.className = `message ${role}`;
+        const label = document.createElement('div');
+        label.className = 'message-label';
+        label.textContent = role === 'user' ? 'You' : 'Assistant';
+        const text = document.createElement('div');
+        text.textContent = content;
+        div.appendChild(label);
+        div.appendChild(text);
+        chatArea.appendChild(div);
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function showTyping() {
+        const div = document.createElement('div');
+        div.className = 'typing-indicator';
+        div.id = 'typing';
+        div.textContent = 'SecurityBot is thinking...';
+        chatArea.appendChild(div);
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function hideTyping() {
+        const el = document.getElementById('typing');
+        if (el) el.remove();
+    }
+
+    async function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message || sending) return;
+
+        sending = true;
+        sendBtn.disabled = true;
+        const level = levelSelect.value;
+
+        addMessage('user', message);
+        userInput.value = '';
+        userInput.style.height = 'auto';
+        showTyping();
+
+        try {
+            const resp = await fetch('/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message, level})
+            });
+            const data = await resp.json();
+            hideTyping();
+            addMessage('assistant', data.response);
+        } catch (err) {
+            hideTyping();
+            addMessage('assistant', 'Error: Could not reach the server. Is Ollama running?');
+        }
+
+        sending = false;
+        sendBtn.disabled = false;
+        userInput.focus();
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Auto-resize textarea
+    userInput.addEventListener('input', () => {
+        userInput.style.height = 'auto';
+        userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+    });
+
+    clearBtn.addEventListener('click', async () => {
+        const level = levelSelect.value;
+        await fetch('/reset', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({level})
+        });
+        chatArea.innerHTML = '';
+        const welcome = document.createElement('div');
+        welcome.className = 'welcome';
+        welcome.innerHTML = `
+            <p>Chat cleared for <strong>Level ${level}</strong>.</p>
+            <p>Conversation history has been reset. Try a new approach!</p>
+        `;
+        chatArea.appendChild(welcome);
+    });
+
+    // Clear chat when switching levels
+    levelSelect.addEventListener('change', () => {
+        chatArea.innerHTML = '';
+        const level = levelSelect.value;
+        const names = {
+            1: 'No Defenses', 2: 'Deflection', 3: 'Keyword Filters',
+            4: 'Identity Lock', 5: 'Anti-Roleplay', 6: 'Decoy Layers'
+        };
+        const welcome = document.createElement('div');
+        welcome.className = 'welcome';
+        welcome.innerHTML = `
+            <p>Switched to <strong>Level ${level} - ${names[level]}</strong></p>
+            <p>Each level has its own conversation history.</p>
+            <p>Extract the hidden password to win!</p>
+        `;
+        chatArea.appendChild(welcome);
+    });
+</script>
+
+</body>
+</html>
