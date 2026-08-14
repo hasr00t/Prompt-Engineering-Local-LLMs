@@ -4,7 +4,7 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-Presented at the **Antisyphon AI Summit, August 2026** by Ashley (Black Hills Information Security).
+Presented at the **Antisyphon AI Summit, August 2026**.
 
 ---
 
