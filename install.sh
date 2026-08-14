@@ -23,14 +23,21 @@ fail() { echo -e "  ${RED}✘${RESET} $1"; }
 info() { echo -e "  ${BLUE}→${RESET} $1"; }
 warn() { echo -e "  ${YELLOW}!${RESET} $1"; }
 
-echo -e "\n${BOLD}Prompt Engineering Workshop — Lab Installer${RESET}\n"
+echo -e "\n${BOLD}Prompt Engineering Workshop - Lab Installer${RESET}\n"
+
+# --- 0. Don't run as root ---
+if [ "$(id -u)" -eq 0 ]; then
+    fail "Please run this script as your normal user, not with sudo."
+    echo "    The script will use sudo internally for the steps that need it."
+    exit 1
+fi
 
 # --- 1. Check prerequisites ---
 echo -e "${BOLD}[1/5] Checking prerequisites${RESET}"
 
 if ! command -v ollama &>/dev/null; then
     fail "Ollama is not installed."
-    echo "    Install it first — this should have been done in the Keeping Things Local workshop."
+    echo "    Install it first, this should have been done in the Keeping Things Local workshop."
     echo "    https://ollama.com/download/linux"
     exit 1
 fi
@@ -45,17 +52,25 @@ pass "Ollama is running"
 
 if ! command -v python3 &>/dev/null; then
     fail "Python 3 is not installed."
-    echo "    Install it with:  sudo apt install python3 python3-venv"
+    echo "    Install it with:  sudo apt install python3"
     exit 1
 fi
-pass "Python 3 is installed ($(python3 --version 2>&1 | awk '{print $2}'))"
+PY_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+pass "Python 3 is installed ($PY_VERSION)"
 
+VENV_PKG="python${PY_VERSION}-venv"
 if ! python3 -c "import venv" &>/dev/null; then
-    fail "Python venv module is not available."
-    echo "    Install it with:  sudo apt install python3-venv"
-    exit 1
+    info "Installing $VENV_PKG (requires sudo)..."
+    sudo apt-get install -y "$VENV_PKG" > /dev/null 2>&1
+    if ! python3 -c "import venv" &>/dev/null; then
+        fail "Could not install $VENV_PKG automatically."
+        echo "    Install it manually with:  sudo apt install $VENV_PKG"
+        exit 1
+    fi
+    pass "$VENV_PKG installed"
+else
+    pass "Python venv module is available"
 fi
-pass "Python venv module is available"
 
 # --- 2. Pull llama3.2 ---
 echo -e "\n${BOLD}[2/5] Checking llama3.2 model${RESET}"
@@ -81,7 +96,7 @@ for i in 1 2 3 4 5 6; do
     fi
 
     if ollama list | grep -q "$MODEL_NAME"; then
-        pass "$MODEL_NAME already exists — skipping"
+        pass "$MODEL_NAME already exists, skipping"
     else
         info "Building $MODEL_NAME..."
         ollama create "$MODEL_NAME" -f "$MODELFILE"
@@ -124,14 +139,12 @@ fi
 
 # --- Done ---
 echo -e "\n${GREEN}${BOLD}Setup complete!${RESET}\n"
-echo -e "${BOLD}To run the labs:${RESET}"
-echo ""
-echo "  CLI challenges (any level):"
+echo -e "${BOLD}To run CLI challenges:${RESET}"
 echo "    ollama run injection-level1"
 echo ""
-echo "  Web app (recommended for the injection lab):"
-echo "    cd \"$APP_DIR\""
-echo "    source .venv/bin/activate"
-echo "    python3 app.py"
-echo "    # Then open http://localhost:5000"
+echo -e "${BOLD}Starting the Prompt Injection Challenge web app...${RESET}"
+echo "    Open http://localhost:5000 in your browser."
+echo "    Press Ctrl+C to stop the server."
 echo ""
+cd "$APP_DIR"
+exec "$VENV_DIR/bin/python" app.py
