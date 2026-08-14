@@ -69,6 +69,8 @@ The lab VM and pre-loaded models are **distributed separately** from this reposi
 After the VM is running and Ollama is available:
 
 ```bash
+chmod +x install.sh
+
 ./install.sh
 ```
 
