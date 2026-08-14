@@ -4,19 +4,19 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-Presented at the **Antisyphon AI Summit, August 2026**.
+Presented at the **Antisyphon AI Summit, August 2026** by Ashley (Black Hills Information Security).
 
 ---
 
 ## About This Workshop
 
-Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on — a defensible finding, a tuned detection, a configuration review that identifies the real escalation path — is a different but learnable skill. This four-hour, hands-on workshop teaches the two layers of prompting that most people blur into one: building a strong prompt before you hit enter, then running the refine-and-verify loop after the first draft comes back.
+Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on (a defensible finding, a tuned detection, a configuration review that identifies the real escalation path) is a different but learnable skill. This four-hour, hands-on workshop teaches the two layers of prompting that most people blur into one: building a strong prompt before you hit enter, then running the refine-and-verify loop after the first draft comes back.
 
-This workshop is the second in a two-part series. The first — [Keeping Things Local: Build Private LLMs for Your Team](https://github.com/DeltaCorvi/AT-Workshop-Keeping-Things-Local-2026) — covers setting up local LLMs with Ollama, mesh networking, and authentication. You'll build on that foundation here. Didn't take the first workshop? No problem: a ready-to-go VM is provided.
+This workshop is the second in a two-part series. The first, [Keeping Things Local: Build Private LLMs for Your Team](https://github.com/DeltaCorvi/AT-Workshop-Keeping-Things-Local-2026), covers setting up local LLMs with Ollama, mesh networking, and authentication. You'll build on that foundation here. Didn't take the first workshop? No problem: a ready-to-go VM is provided.
 
 ## What You'll Build
 
-A prompt engineering workflow you can apply to any security task: from a first-draft prompt that produces mediocre output, through structured iteration, to a polished result that's client-ready — then packaged into a reusable Modelfile you can run again on the next engagement. Along the way, you'll break AI defenses in a hands-on prompt injection challenge to understand why prompt-based guardrails aren't a security boundary.
+A prompt engineering workflow you can apply to any security task: from a first-draft prompt that produces mediocre output, through structured iteration, to a polished result that's client-ready, then packaged into a reusable Modelfile you can run again on the next engagement. Along the way, you'll break AI defenses in a hands-on prompt injection challenge to understand why prompt-based guardrails aren't a security boundary.
 
 ## What You'll Learn
 
@@ -90,10 +90,10 @@ The lab manual is organized into sequential modules. Each builds on the last.
 | 01 | [Getting Started](Lab%20Manual/01%20Getting%20Started.md) | Verify your environment, meet the CVE, and build the injection models |
 | 02 | [Building Strong Prompts](Lab%20Manual/02%20Building%20Strong%20Prompts.md) | Iterate from a lazy prompt to a professional pentest finding, then generate PoC exploit code or Splunk detections |
 | 03 | [From Prompt to Reusable Skill](Lab%20Manual/03%20From%20Prompt%20to%20Reusable%20Skill.md) | Package a refined prompt into a Modelfile, test it across varied inputs with a structured evaluation rubric |
-| 04 | [Prompt Injection Challenge](Lab%20Manual/04%20Prompt%20Injection%20Challenge.md) | Extract secrets from AI models with escalating defenses — 4 in-class levels + 2 take-home with walkthroughs |
+| 04 | [Prompt Injection Challenge](Lab%20Manual/04%20Prompt%20Injection%20Challenge.md) | Extract secrets from AI models with escalating defenses across 4 in-class levels and 2 take-home challenges with walkthroughs |
 | 05 | [Wrap Up and References](Lab%20Manual/05%20Wrap%20Up%20and%20References.md) | Key takeaways, further reading, and where to go from here |
 
-All labs center on **CVE-2026-24061** (GNU inetutils telnetd authentication bypass, CVSS 9.8) — a real, recently disclosed vulnerability with clear offensive and defensive angles.
+All labs center on **CVE-2026-24061** (GNU inetutils telnetd authentication bypass, CVSS 9.8), a real, recently disclosed vulnerability with clear offensive and defensive angles.
 
 ## Repository Layout
 
@@ -102,10 +102,10 @@ All labs center on **CVE-2026-24061** (GNU inetutils telnetd authentication bypa
 ├── README.md                       This file
 ├── LICENSE                         CC BY 4.0
 ├── install.sh                      Lab installer script
-├── Lab Manual/                     The workshop modules (00–05) and walkthroughs
+├── Lab Manual/                     The workshop modules (00-05) and walkthroughs
 │   └── assets/                     Diagrams and screenshots used in the manual
 ├── lab files/                      Lab materials
-│   ├── modelfiles/                 Prompt injection Modelfiles (levels 1–6)
+│   ├── modelfiles/                 Prompt injection Modelfiles (levels 1-6)
 │   ├── injection-app/              Flask web app for the injection challenge
 │   └── artifacts/                  CVE scan output and engagement notes
 ├── prompt-eng-cyber-evals/         24 evaluation test cases for prompt quality
