@@ -12,7 +12,7 @@ Presented at the **Antisyphon AI Summit, August 2026**.
 
 Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on (a defensible finding, a tuned detection, a configuration review that identifies the real escalation path) is a different but learnable skill. This four-hour, hands-on workshop teaches the two layers of prompting that most people blur into one: building a strong prompt before you hit enter, then running the refine-and-verify loop after the first draft comes back.
 
-This workshop is the second in a two-part series. The first, [Keeping Things Local: Build Private LLMs for Your Team](https://github.com/DeltaCorvi/AT-Workshop-Keeping-Things-Local-2026), covers setting up local LLMs with Ollama, mesh networking, and authentication. You'll build on that foundation here. Didn't take the first workshop? No problem: a ready-to-go VM is provided.
+This workshop is the second in a two-part series. The first, [Keeping Things Local: Build Private LLMs for Your Team](https://github.com/DeltaCorvi/AT-Workshop-Keeping-Things-Local-2026), covers setting up local LLMs with Ollama, mesh networking, and authentication. You'll build on that foundation here. Didn't take the first workshop? No problem: a ready-to-go cloud hosted VM is provided.
 
 ## What You'll Build
 
