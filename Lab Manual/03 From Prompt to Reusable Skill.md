@@ -102,7 +102,7 @@ One of the most effective prompt engineering techniques is **separating planning
 
 ### Step 1: Plan the Skill (This Session)
 
-Open a session and have the model help you design the skill. You're not asking it to write findings yet — you're asking it to help you design the *instructions* that will write findings.
+Open a session and have the model help you design the skill. You're not asking it to write findings yet you're asking it to help you design the *instructions* that will write findings.
 
 > [!vm] Lab VM
 > ```shell
