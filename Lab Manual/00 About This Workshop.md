@@ -15,7 +15,7 @@ maxLevel: 3
 
 Thank you for signing up for *Prompt Engineering for Cyber Security* at the Antisyphon AI Summit, 2026.
 
-Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on, like a defensible finding, a tuned detection, or a configuration review that identifies the real escalation path, is a different but learnable skill.
+Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on, like a defensible finding, a tuned detection, or a configuration review that identifies the real escalation path, is a different but learnable skill. I find that a lot of Googling skills are transferrable to AI prompting skills.
 
 This workshop teaches you the two layers of prompting that most people blur into one: building a strong prompt *before* you hit enter (role, context, constraints, output shape), then running the refine-and-verify loop *after* the first draft comes back. You'll practice on the jobs you actually do, learn to package prompt workflows into reusable skills, try your hand at breaking AI guardrails, and finish with a practical understanding of what makes AI output scream "a robot wrote this."
 
