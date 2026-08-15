@@ -29,13 +29,13 @@ Every AI tool has layers... things you type once per conversation, things that p
 
 | Layer | What goes here | Lifespan |
 |-------|---------------|----------|
-| **The prompt** | Anything that changes per task — the specific input, the specific question, engagement-specific context | One conversation |
-| **Persistent instructions** | Anything you'd want every time you do this *type* of work — output format, tone, constraints, your firm's template, banned words | Every session that loads them |
+| **The prompt** | Anything that changes per task: the specific input, the specific question, engagement-specific context | One conversation |
+| **Persistent instructions** | Anything you'd want every time you do this *type* of work: output format, tone, constraints, your firm's template, banned words | Every session that loads them |
 | **The model** | General knowledge, language ability, reasoning | Permanent (you don't control this with local models) |
 
 The middle layer is the one people get wrong. They either put everything in the prompt (re-typing the same format instructions every session) or they try to bake everything into persistent instructions (making them so long they waste tokens on context that only applies sometimes).
 
-**The test:** Before putting an instruction in a persistent file, ask — *will I want this instruction next time too?* If yes, it belongs in the persistent layer. If it depends on the engagement, the client, or the input, it belongs in the prompt.
+**The test:** Before putting an instruction in a persistent file, ask *will I want this instruction next time too?* If yes, it belongs in the persistent layer. If it depends on the engagement, the client, or the input, it belongs in the prompt.
 
 ### How This Looks Across Tools
 
