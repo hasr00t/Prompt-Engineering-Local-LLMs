@@ -17,25 +17,25 @@ maxLevel: 3
 
 Over four hours, you developed a practical prompt engineering toolkit for security work:
 
-**A structured prompting method.** Role, context, constraints, output shape — not as a formula to memorize, but as a checklist you internalized through practice. The gap between your first finding in Lab 02 and your last one was the prompt, not the model.
+**A structured prompting method.** Role, context, constraints, output shape. Not a formula to memorize, but a checklist you internalized through practice. The gap between your first finding in Lab 02 and your last one was the prompt, not the model.
 
 **An evaluation discipline.** The 0/1/2 rubric scoring method gives you a way to measure whether a prompt change actually improved the output, rather than just feeling different. When you revisit a prompt next month, you can compare scores instead of guessing.
 
 **A reusable skill.** The Modelfile you built in Lab 03 encodes your professional judgment in a format that survives session boundaries, works on any Ollama instance, and can be shared with teammates. Every engagement-specific workflow you standardize this way is time you don't spend re-prompting.
 
-**An adversarial intuition.** The injection challenge isn't just about breaking AI guardrails — it's about understanding that system prompts are instructions, not security boundaries. Every AI application you build or assess from here on should be informed by what you learned in Lab 04: if the model can see it, assume an attacker can extract it.
+**An adversarial intuition.** The injection challenge isn't just about breaking AI guardrails. It's about understanding that system prompts are instructions, not security boundaries. Every AI application you build or assess from here on should be informed by what you learned in Lab 04: if the model can see it, assume an attacker can extract it.
 
 ## Where to Go Next
 
 **Practice the eval cases.** The `prompt-eng-cyber-evals` directory on the VM contains 24 evaluation cases spanning finding writing, config review, detection engineering, log analysis, threat analysis, exploit precondition analysis, and documentation. Each case has a rubric. Pick cases that match your day-to-day work and use them to sharpen your prompts.
 
-**Build more skills.** Every time you spend more than 10 minutes iterating on a prompt for a recurring task, stop and ask: should this be a Modelfile? Report section templates, methodology checklists, config review rubrics, triage playbooks — if you've done the work to get good output once, package it.
+**Build more skills.** Every time you spend more than 10 minutes iterating on a prompt for a recurring task, stop and ask: should this be a Modelfile? Report section templates, methodology checklists, config review rubrics, triage playbooks. If you've done the work to get good output once, package it.
 
 **Try Gandalf.** [gandalf.lakera.ai](https://gandalf.lakera.ai/baseline) is a web-based prompt injection challenge with more levels and different defense strategies than what we covered today. Good practice for the adversarial side.
 
 **Take the HuggingFace Context Engineering Course.** The [Context Engineering Course](https://huggingface.co/learn/context-course/en/unit0/introduction) covers skills, context management, and agent design in more depth than a single workshop can.
 
-**Run your own model.** If you took *Keeping Things Local* and have a decent GPU, run a larger model at home. The prompting techniques transfer directly — they just land harder on a more capable model.
+**Run your own model.** If you took *Keeping Things Local* and have a decent GPU, run a larger model at home. The prompting techniques transfer directly. They just land harder on a more capable model.
 
 ---
 

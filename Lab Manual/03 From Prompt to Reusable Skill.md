@@ -13,7 +13,7 @@ maxLevel: 3
 
 # Lab: From Prompt to Reusable Skill
 
-In the previous lab, you built a prompt that produces a good finding for *one specific vulnerability*. That prompt dies when you close the session. In this lab, you'll turn it into a **reusable skill** — a Modelfile with a structured SYSTEM prompt that works across *any* Nessus finding — and test it using a structured evaluation method.
+In the previous lab, you built a prompt that produces a good finding for *one specific vulnerability*. That prompt dies when you close the session. In this lab, you'll turn it into a **reusable skill**: a Modelfile with a structured SYSTEM prompt that works across *any* Nessus finding. You will test it using a structured evaluation method.
 
 If you took the *Keeping Things Local* workshop, you already know how to build Modelfiles with `FROM`, `PARAMETER`, and `SYSTEM`. This lab builds on that foundation, but instead of a persona (Daffy Duck) or a simple task (quizmaker), you're building a professional tool.
 
@@ -23,7 +23,7 @@ If you took the *Keeping Things Local* workshop, you already know how to build M
 
 Before you start building, you need to answer a question that comes up in every AI tool: **where should this instruction live?**
 
-Every AI tool has layers — things you type once per conversation, things that persist across sessions, and things baked into the model itself. The layers look different depending on the tool, but the decision is always the same.
+Every AI tool has layers: things you type once per conversation, things that persist across sessions, and things baked into the model itself. The layers look different depending on the tool, but the decision is always the same.
 
 ### The Three Layers
 
@@ -92,13 +92,13 @@ Notice what's NOT in there: the specific vulnerability, the specific client, the
 
 ### What a Good Modelfile SYSTEM Looks Like
 
-You'll build one in the next section. The same principles apply — the SYSTEM block carries the instructions that are true for every run of this skill. The per-run input comes from what the user types at the `>>>` prompt.
+You'll build one in the next section. The same principles apply. The SYSTEM block carries the instructions that are true for every run of this skill. The per-run input comes from what the user types at the `>>>` prompt.
 
 ---
 
 ## Part 1: Separate Planning from Execution
 
-One of the most effective prompt engineering techniques is **separating planning from execution**. When you plan and build in the same session, the conversation accumulates context that can pollute the model's output — earlier bad attempts, corrections, tangents. A clean session with a refined prompt produces better results than a long session that arrived at the same prompt through trial and error.
+One of the most effective prompt engineering techniques is **separating planning from execution**. When you plan and build in the same session, the conversation accumulates context that can pollute the model's output: earlier bad attempts, corrections, tangents. A clean session with a refined prompt produces better results than a long session that arrived at the same prompt through trial and error.
 
 ### Step 1: Plan the Skill (This Session)
 
@@ -184,7 +184,7 @@ Confidence: [Confirmed / Needs Validation / Informational]
 ```
 
 > [!tip] Why temperature 0.3?
-> You want consistency, not creativity. A lower temperature makes the model stick to your template and constraints more reliably. The *Keeping Things Local* workshop used temperature 1.0 for Daffy Duck because variety was the goal — here, predictability is.
+> You want consistency, not creativity. A lower temperature makes the model stick to your template and constraints more reliably. The *Keeping Things Local* workshop used temperature 1.0 for Daffy Duck because variety was the goal. Here, predictability is.
 
 Build and test it:
 
@@ -263,7 +263,7 @@ For each of the three outputs, score these criteria:
 ### Interpret Your Scores
 
 - **Input A** should score high. If it doesn't, your basic instructions are wrong.
-- **Input B** is the litmus test. A score of 2 on Confidence means your skill correctly marks it as "Needs Validation" and mentions backporting. A 0 means your skill declared it confirmed-vulnerable based on a banner alone — a mistake that ends up in real reports all the time.
+- **Input B** is the litmus test. A score of 2 on Confidence means your skill correctly marks it as "Needs Validation" and mentions backporting. A 0 means your skill declared it confirmed-vulnerable based on a banner alone. That mistake ends up in real reports all the time.
 - **Input C** should be downgraded to Informational. If your skill wrote it up as a real finding, your constraints aren't strong enough.
 
 ### Fix and Re-Test
@@ -291,10 +291,10 @@ You now have a Modelfile that:
 - Produces consistent, structured output
 - Can be shared with teammates or loaded on any Ollama instance
 
-This is what a **skill** is in practice — a reusable, structured package of knowledge that makes an AI good at one specific task. You didn't retrain the model. You wrote a system prompt that carries your expertise.
+This is what a **skill** is in practice: a reusable, structured package of knowledge that makes an AI good at one specific task. You didn't retrain the model. You wrote a system prompt that carries your expertise.
 
 > [!tip] Stretch Goal
-> If you finish early, try feeding your skill a deliberately weird input — a Burp Suite web application finding instead of a Nessus plugin, or a hand-written vulnerability note with no structured fields. Does the skill degrade gracefully (mapping what it can, flagging what it can't)? Or does it hallucinate a well-formed but false finding? That tells you how robust your constraints are.
+> If you finish early, try feeding your skill a deliberately weird input — a Burp Suite web application finding instead of a Nessus plugin, or a hand-written vulnerability note with no structured fields. Does the skill degrade gracefully (mapping what it can, flagging what it can't)? Or does it hallucinate a well-formed but false finding? That tells you how strong your constraints are.
 
 > [!checkpoint] Checkpoint
 > You have finished this lab when all of the boxes below are ticked.

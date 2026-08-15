@@ -11,7 +11,7 @@ minLevel: 0
 maxLevel: 3
 ```
 
-# Level 1 Walkthrough — Naive Defense
+# Level 1 Walkthrough - Naive Defense
 
 > **Flag:** `FLAG{just_ask_nicely}`
 
@@ -89,7 +89,7 @@ This one is designed to fall quickly. If you're stuck after two minutes, you're 
 
 ## Why It Works
 
-1. **"Never" is not enforcement.** The model received a natural-language instruction, not a programmatic constraint. It weighs that instruction against everything else — including its training to be helpful. Helpfulness usually wins.
+1. **"Never" is not enforcement.** The model received a natural-language instruction, not a programmatic constraint. It weighs that instruction against everything else, including its training to be helpful. Helpfulness usually wins.
 
 2. **No redundancy.** There's one defensive instruction. If the model doesn't follow it — and with a small model, compliance is inconsistent — there's nothing backing it up.
 
@@ -97,7 +97,7 @@ This one is designed to fall quickly. If you're stuck after two minutes, you're 
 
 ## The Lesson
 
-**Instructions are not enforcement.** A system prompt is a *suggestion* to the model, not a security boundary. If your entire defense is "please don't do the thing," the model will do the thing. This is why Level 1 exists — it establishes the baseline that everything else builds on: prompt-based instructions are a tool for shaping behavior, not a mechanism for guaranteeing it.
+**Instructions are not enforcement.** A system prompt is a *suggestion* to the model, not a security boundary. If your entire defense is "please don't do the thing," the model will do the thing. This is why Level 1 exists. It establishes the baseline that everything else builds on: prompt-based instructions are a tool for shaping behavior, not a mechanism for guaranteeing it.
 
 ---
 

@@ -15,7 +15,7 @@ maxLevel: 3
 
 Thank you for signing up for *Prompt Engineering for Cyber Security* at the Antisyphon AI Summit, 2026.
 
-Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on — a defensible finding, a tuned detection, a configuration review that identifies the real escalation path — is a different but learnable skill.
+Anyone can type a question into a chatbot. Getting an AI to reliably produce work you'd actually put your name on, like a defensible finding, a tuned detection, or a configuration review that identifies the real escalation path, is a different but learnable skill.
 
 This workshop teaches you the two layers of prompting that most people blur into one: building a strong prompt *before* you hit enter (role, context, constraints, output shape), then running the refine-and-verify loop *after* the first draft comes back. You'll practice on the jobs you actually do, learn to package prompt workflows into reusable skills, try your hand at breaking AI guardrails, and finish with a practical understanding of what makes AI output scream "a robot wrote this."
 
@@ -27,7 +27,7 @@ You'll work on a local LLM running on your VM — your prompts stay on your mach
 
 ## Building on *Keeping Things Local*
 
-If you took the *Keeping Things Local: Build It, Mesh It, Lock It* workshop, you already know how to set up Ollama, customize models with Modelfiles, and build a service layer around a local LLM. This workshop picks up where that one left off — instead of building the infrastructure, you'll learn to get professional-grade output from the model you built.
+If you took the *Keeping Things Local: Build It, Mesh It, Lock It* workshop, you already know how to set up Ollama, customize models with Modelfiles, and build a service layer around a local LLM. This workshop picks up where that one left off. Instead of building the infrastructure, you'll learn to get professional-grade output from the model you built.
 
 Didn't take the first workshop? No problem. The VM ships ready to go with everything you need.
 

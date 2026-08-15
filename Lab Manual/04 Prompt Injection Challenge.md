@@ -17,7 +17,7 @@ Time to break things.
 
 You've spent the workshop learning to get *good* output from an LLM by engineering prompts carefully. Now flip it around: you're the attacker. Each level has an AI model guarding a secret password behind increasingly hardened defenses. Your job is to extract it.
 
-This lab uses the injection models you built in [[01 Getting Started]]. You can use either the command line (`ollama run`) or the web-based challenge app — the web app hides the system prompt so you can't just read the Modelfile, which is more realistic.
+This lab uses the injection models you built in [[01 Getting Started]]. You can use either the command line (`ollama run`) or the web-based challenge app. The web app hides the system prompt so you can't just read the Modelfile, which is more realistic.
 
 ---
 
@@ -46,7 +46,7 @@ Then open a browser on the VM and go to `http://localhost:5000`. Use the dropdow
 
 ## Your Toolkit
 
-These are the techniques from the talk. Try them all — different levels are vulnerable to different approaches.
+These are the techniques from the talk. Try them all. Different levels are vulnerable to different approaches.
 
 | Technique | How It Works |
 |-----------|-------------|
@@ -152,15 +152,15 @@ This isn't a hacking exercise for its own sake. Each level demonstrates a real-w
 | 1 | Instructions are not enforcement. A system prompt is a *suggestion* to the model, not a security boundary. |
 | 2 | Keyword-avoidance is trivially bypassed. If your defense depends on the attacker using specific words, it's not a defense. |
 | 3 | Output filtering is harder to bypass than input filtering, but encoding and indirection still find gaps. |
-| 4 | Defense in depth works — not because each layer is perfect, but because an attacker has to bypass *all* of them. The time and skill required goes up with each layer. |
+| 4 | Defense in depth works, not because each layer is perfect, but because an attacker has to bypass *all* of them. The time and skill required goes up with each layer. |
 
-**The core takeaway:** If a model can see a secret, assume a sufficiently motivated attacker can extract it. Prompt-based guardrails raise the bar; they don't eliminate the risk. Design your AI applications accordingly — don't put secrets in system prompts in production.
+**The core takeaway:** If a model can see a secret, assume a sufficiently motivated attacker can extract it. Prompt-based guardrails raise the bar; they don't eliminate the risk. Design your AI applications accordingly. Do not put secrets in system prompts in production.
 
 ---
 
 ## Take-Home Challenges
 
-Levels 5 and 6 are available on the VM for after class. Each one comes with a full walkthrough document — hints, solutions, and the security lessons behind them.
+Levels 5 and 6 are available on the VM for after class. Each one comes with a full walkthrough document: hints, solutions, and the security lessons behind them.
 
 - [[04a Take-Home Level 5 - The Roleplay Trap]]
 - [[04b Take-Home Level 6 - Defense in Depth]]

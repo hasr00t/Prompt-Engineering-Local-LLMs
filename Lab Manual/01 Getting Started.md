@@ -51,8 +51,8 @@ Every lab in this workshop centers on the same vulnerability. You'll write findi
 
 - **CVSS Score:** 9.8 (Critical)
 - **Attack Vector:** Network, no authentication required
-- **Impact:** Complete system compromise — root access
-- **CISA KEV:** Yes — actively exploited in the wild
+- **Impact:** Complete system compromise: root access
+- **CISA KEV:** Yes, actively exploited in the wild
 - **Fix:** Upgrade to GNU inetutils 2.8 or later; disable telnet in favor of SSH
 
 ### Why This Vulnerability

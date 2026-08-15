@@ -132,7 +132,7 @@ You should see:
 The difference is the prompt, not the model. The same LLM produced both outputs.
 
 > [!tip] The Refine-and-Verify Loop
-> If the Step 4 output still has problems — maybe the severity justification is weak, or the remediation is too generic — don't start over. Tell the model what's wrong:
+> If the Step 4 output still has problems, like a weak severity justification or generic remediation, don't start over. Tell the model what's wrong:
 > ```
 > The remediation section is too generic. Rewrite it with specific 
 > steps for this environment: the host runs a legacy inventory 
@@ -192,7 +192,7 @@ Requirements:
 - Does the script handle the case where the host isn't vulnerable?
 
 > [!note]
-> A small local model may not produce a perfectly working exploit on the first try. That's fine — the lab is about prompt iteration, not about having a working 0-day at the end. Focus on how much better the output gets as you refine the prompt.
+> A small local model may not produce a perfectly working exploit on the first try. That's fine. The lab is about prompt iteration, not about having a working 0-day at the end. Focus on how much better the output gets as you refine the prompt.
 
 ---
 
