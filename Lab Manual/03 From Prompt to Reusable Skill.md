@@ -21,9 +21,9 @@ If you took the *Keeping Things Local* workshop, you already know how to build M
 
 ## What Goes Where: The Decision Framework
 
-Before you start building, you need to answer a question that comes up in every AI tool: **where should this instruction live?**
+Before you start building, you need to answer a question that comes up in every AI tool **where should this instruction live?**
 
-Every AI tool has layers: things you type once per conversation, things that persist across sessions, and things baked into the model itself. The layers look different depending on the tool, but the decision is always the same.
+Every AI tool has layers... things you type once per conversation, things that persist across sessions, and things baked into the model itself. The layers look different depending on the tool, but the decision is always the same.
 
 ### The Three Layers
 
