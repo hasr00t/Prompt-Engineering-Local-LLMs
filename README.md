@@ -23,16 +23,16 @@ A prompt engineering workflow you can apply to any security task: from a first-d
 By the end of the workshop, you will be able to:
 
 - Build strong prompts with the right role, context, constraints, and output shape
-- Run a disciplined refine-and-verify loop on real security tasks: findings, config analysis, detections, and proof-of-concept tooling
+- Run a disciplined refine-and-verify loop on security tasks: findings, config analysis, detections, and proof-of-concept tooling
 - Detect and eliminate AI "tells" from client-facing writing
 - Separate planning from execution across multiple sessions
-- Package repeatable prompt workflows into reusable Skills (Modelfiles)
+- Package repeatable prompt workflows into reusable Skills or Modelfiles
 - Build lightweight evaluation sets to compare prompt revisions and measure improvement
 - Craft and recognize injection, jailbreaking, and data-extraction prompts, and understand why they work
 
 ## Who This Is For
 
-Security practitioners who want to get real, defensible work out of an AI, and who'd rather keep sensitive prompts on hardware they control. It's a strong fit for:
+Security practitioners who want to get learn how to create good repeatable prompts, learn how to evaluate prompts, and learn prompt injection techniques. It's a strong fit for:
 
 - **Red teamers and penetration testers** who want to speed up findings, tooling, and PoC validation without shipping client data to a third party
 - **Blue teamers and detection engineers** who want to draft and tune Splunk and EDR detections faster
@@ -49,14 +49,13 @@ Security practitioners who want to get real, defensible work out of an AI, and w
 
 ## System Requirements
 
-The lab VM and everything you need are provided. If you are running the VM locally, VMware Workstation Pro and Fusion Pro are free for personal, educational, and commercial use with no license key required.
+The lab VM and everything you need are provided. If you are running the VM locally, VMware Workstation Pro and Fusion Pro are free for personal, educational, and commercial use with no license key required. Once you have a Linux VM up and running, if running this locally, run the install.sh script.
 
 - 16 GB RAM (24 GB or more recommended)
 - A modern multi-core CPU (no GPU required)
 - Approximately 40 GB free disk space
 - CPU with virtualization support enabled in BIOS/UEFI
-- VMware Workstation, VMware Player, VMware Fusion, or VirtualBox
-- Internet connection to download and import the VM before class
+- Internet connection to download and import the VM before class if you're not using the provided cloud hosted VMs
 
 ## Lab VM and Large Files
 
@@ -80,7 +79,7 @@ The install script checks prerequisites, pulls `llama3.2` if needed, builds the 
 
 The lab manual is written as an [Obsidian](https://obsidian.md/) vault, and this repository is that vault. The lab VM has Obsidian installed with the manual loaded and ready to use. To view a separate copy as intended, open the repository folder as a vault in Obsidian instead of reading the files on GitHub or in another Markdown editor. In Obsidian, the manual renders with callouts, labels showing which VM each command runs on, checkpoints, and Previous/Next navigation.
 
-If you don't have Obsidian, the markdown stays perfectly readable on GitHub or in any plain Markdown viewer. The formatting and callouts just won't render as prettily.
+If you don't have Obsidian, the markdown stays perfectly readable on GitHub or in any plain Markdown viewer.
 
 ## Workshop Modules
 
@@ -138,4 +137,4 @@ This work is licensed under the [Creative Commons Attribution 4.0 International 
 
 ## Author
 
-**Ashley**, Black Hills Information Security
+**Ashley Knowles**, Black Hills Information Security
