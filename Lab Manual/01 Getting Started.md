@@ -15,6 +15,17 @@ maxLevel: 3
 
 Before diving into the labs, confirm that your VM is running and the tools are ready.
 
+### Run the installer
+
+> [!vm] Lab VM
+> ```shell
+> chmod +x install.sh
+>
+> ./install.sh
+> ```
+
+This should complete without issue, if there are any errors please let me know and we'll work through them together. The root credentials are shown in the MetaCTF/Skillbit workshop page below the VM.
+
 ### Confirm Ollama Is Running
 
 > [!vm] Lab VM
@@ -43,7 +54,7 @@ You should get a response within a few seconds. If the response takes more than 
 
 ## The Scenario: CVE-2026-24061
 
-Every lab in this workshop centers on the same vulnerability. You'll write findings about it, generate exploit code and detections for it, and build reusable skills around it. Here's what you need to know.
+Every lab in this workshop centers on the same vulnerability. You'll write findings about it, generate exploit code and detections for it, and build reusable skills around it.
 
 ### What It Is
 
@@ -68,9 +79,9 @@ This CVE is ideal for learning prompt engineering because:
 
 You have two files in the `lab files/artifacts/` directory that simulate what you'd have during a real engagement:
 
-**`cve-2026-24061-nessus.txt`** — A Nessus scan output showing the vulnerability on a target host. This is the raw scanner data you'd copy into a prompt.
+**`cve-2026-24061-nessus.txt`** — A Nessus scan output showing the vulnerability on a target host. This is the raw scanner data that you can copy into a prompt.
 
-**`engagement-notes.txt`** — Engagement context: client name, scope, rules of engagement, and client-provided notes about the affected host. This is the business context that turns a generic finding into a useful one.
+**`engagement-notes.txt`** — Engagement context: client name, scope, rules of engagement, and client-provided notes about the affected host. This is important context to give AI so that it understands any constraints or maybe looser rules. Maybe the host has sensitive data or maybe it's a honeypot that they want you to make sure isn't too vulnerable.
 
 Take a minute to read both files. You'll reference them throughout the labs.
 
@@ -100,7 +111,7 @@ The prompt injection lab uses custom Modelfiles. Build them now so they're ready
 You should see six models build successfully. Each one takes a second or two since they all build on the pre-loaded `llama3.2`.
 
 > [!checkpoint] Checkpoint
-> You have finished this lesson when all of the boxes below are ticked. Work through them in order, and if one does not hold, go back to the section it came from before moving on. Tick each box as you confirm it.
+> You have finished this lesson when all of the boxes below are ticked.
 >
 > - [ ] `ollama list` shows `llama3.2`
 > - [ ] A one-shot prompt returns a response within a few seconds
