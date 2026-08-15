@@ -13,7 +13,7 @@ maxLevel: 3
 
 # Lab: Building Strong Prompts
 
-This lab has two exercises. In the first, you'll write a professional pentest finding — starting with a terrible prompt and iterating until the output is something you'd actually deliver to a client. In the second, you'll choose your own path: generate proof-of-concept exploit code (red team) or Splunk detection alerts (blue team) for the same vulnerability.
+This lab has two exercises. In the first, you'll write a professional penetration test finding starting with a terrible prompt and iterating until the output is something you'd actually want to deliver to a client. In the second, you'll choose your own path: generate proof-of-concept exploit code (red team) or Splunk detection alerts (blue team) for the same vulnerability.
 
 Both exercises use CVE-2026-24061 and the artifacts you reviewed in [[01 Getting Started]].
 
@@ -31,12 +31,12 @@ Start with the worst prompt you can think of. Open an interactive session and ty
 > >>> Write a finding about CVE-2026-24061
 > ```
 
-Read the output carefully. Don't fix it yet — study it. You're looking for two categories of problems:
+Read the output, don't fix it yet, you're looking for two categories of problems:
 
 **Structural problems:**
 - Is the finding organized the way your firm's deliverables are?
 - Does it have the sections a client needs (title, severity, description, impact, evidence, remediation)?
-- Is severity justified or just stated?
+- Is the severity justified or just stated?
 
 **AI tells — the words that scream "a robot wrote this":**
 Look for these specific patterns from the talk:
@@ -46,9 +46,7 @@ Look for these specific patterns from the talk:
 - Hedging language: "It should be noted that," "It is worth mentioning"
 - Puffed-up significance: "represents a significant threat to the security landscape"
 - Generic advice that adds no value: "organizations should prioritize security"
-
-> [!tip] Keep Count
-> Count the AI tells in the output. Write the number down. You'll compare it to your refined output later.
+- Wording that is doomsday-ish or my personal favorite... "here's the smoking gun"
 
 ### Step 2: Add Role
 
@@ -119,6 +117,8 @@ Write a finding using this exact format:
 **Evidence:** [What the scanner found — quote the relevant output]
 **Remediation:** [Specific, actionable steps — not generic advice]
 **References:** [CVE number and relevant links]
+
+Before producing the final output, read over it for clarity, correctness, and grammar mistakes.
 ```
 
 ### Step 5: Compare Before and After
@@ -145,7 +145,7 @@ The difference is the prompt, not the model. The same LLM produced both outputs.
 
 ## Exercise B: Choose Your Path
 
-Pick **one** of the two exercises below based on your role. Red teamers and pentesters: go with the exploit code. Blue teamers and detection engineers: go with the Splunk alerts. If you finish early, try the other one.
+Pick **one** of the two exercises below based on your role. Red teamers and pentesters will want to go with creating exploit code. Blue teamers and detection engineers may want to create Splunk alerts. If you finish early, try the other one.
 
 ### Red Path: Proof-of-Concept Exploit Code
 
@@ -183,13 +183,15 @@ Requirements:
 - Include inline comments explaining each step of the telnet 
   protocol negotiation
 - Handle connection errors gracefully
+- Include a timeout
 - Print the server's response after authentication bypass
 ```
 
-**Iterate on:**
+**Repeat on:**
 - Does the telnet protocol negotiation look correct? Ask the model to walk you through it.
 - Are the telnet option codes right? (IAC=0xff, WILL=0xfb, SB=0xfa, SE=0xf0, NEW_ENVIRON=0x27)
 - Does the script handle the case where the host isn't vulnerable?
+- Is there anything else YOU think the script should do or needs to do in the environment you're going to execute it in?
 
 > [!note]
 > A small local model may not produce a perfectly working exploit on the first try. That's fine. The lab is about prompt iteration, not about having a working 0-day at the end. Focus on how much better the output gets as you refine the prompt.
