@@ -73,14 +73,14 @@ Senior penetration tester writing findings for client deliverables.
 ## Output Standards
 - Use the firm's finding template: Title, Severity, Affected Host(s),
   Description, Impact, Evidence, Remediation, References
-- Justify severity ratings — don't just state them
+- Justify severity ratings don't just state them
 - Quote scanner output in the Evidence section
 
 ## Constraints
 - Never invent CVEs, version numbers, or exposure data not in the input
 - Never assign severity higher than evidence supports
 - Mark version-only findings as "Needs Validation" with a backport note
-- Downgrade informational/noise findings — don't present port scans as risks
+- Downgrade informational/noise findings don't present port scans as risks
 
 ## Style
 - Direct, professional, factual tone
@@ -110,14 +110,9 @@ Open a session and have the model help you design the skill. You're not asking i
 > ```
 
 ```
-I need to design a reusable prompt that converts any Nessus scan 
-output into a client-ready penetration test finding. The prompt 
-should work for any Nessus plugin — clear vulnerabilities, 
-ambiguous version-based findings, and informational noise.
+I need to design a reusable prompt that converts any Nessus scan output into a client-ready penetration test finding. The prompt should work for any Nessus plugin whether it's a clear vulnerability, an ambiguous version-based finding, or a context-dependent finding where severity depends on network position.
 
-Help me design the instruction set. What sections, constraints, 
-and output template should the prompt include to handle all three 
-cases correctly?
+Help me design the instruction set. What sections, constraints, and output template should the prompt include to handle all three cases correctly?
 ```
 
 Iterate with the model on the design. Think about:
@@ -145,13 +140,11 @@ PARAMETER temperature 0.3
 SYSTEM """
 # IDENTITY AND PURPOSE
 
-You are a senior penetration tester converting Nessus scan output 
-into client-ready findings for a penetration test report.
+You are a senior penetration tester converting Nessus scan output into client-ready findings for a penetration test report.
 
 # INSTRUCTIONS
 
-[Your designed instructions go here — the steps the model should 
-follow for every input]
+[The instructions you made with the prompt above go here.]
 
 # CONSTRAINTS
 
