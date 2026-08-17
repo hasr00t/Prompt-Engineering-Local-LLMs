@@ -70,26 +70,15 @@ fi
 PY_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
 pass "Python 3 is installed ($PY_VERSION)"
 
-VENV_PKG="python${PY_VERSION}-venv"
+info "Installing python3.14-venv (requires sudo)..."
+sudo apt-get update -qq > /dev/null 2>&1
+sudo apt install -y python3.14-venv > /dev/null 2>&1
 if ! python3 -c "import venv" &>/dev/null; then
-    info "Installing $VENV_PKG (requires sudo)..."
-    sudo apt-get update -qq > /dev/null 2>&1
-    if ! sudo apt-get install -y "$VENV_PKG" > /dev/null 2>&1; then
-        info "$VENV_PKG not found in default repos, adding deadsnakes PPA..."
-        sudo apt-get install -y software-properties-common > /dev/null 2>&1
-        sudo add-apt-repository -y ppa:deadsnakes/ppa > /dev/null 2>&1
-        sudo apt-get update -qq > /dev/null 2>&1
-        sudo apt-get install -y "$VENV_PKG" 2>&1 | tail -1
-    fi
-    if ! python3 -c "import venv" &>/dev/null; then
-        fail "Could not install $VENV_PKG automatically."
-        echo "    Install it manually with:  sudo apt install $VENV_PKG"
-        exit 1
-    fi
-    pass "$VENV_PKG installed"
-else
-    pass "Python venv module is available"
+    fail "Could not install python3.14-venv."
+    echo "    Install it manually with:  sudo apt install python3.14-venv"
+    exit 1
 fi
+pass "Python venv module is available"
 
 # --- 2. Pull llama3.2 ---
 echo -e "\n${BOLD}[2/5] Checking llama3.2 model${RESET}"
