@@ -36,19 +36,31 @@ fi
 echo -e "${BOLD}[1/5] Checking prerequisites${RESET}"
 
 if ! command -v ollama &>/dev/null; then
-    fail "Ollama is not installed."
-    echo "    Install it first, this should have been done in the Keeping Things Local workshop."
-    echo "    https://ollama.com/download/linux"
-    exit 1
+    info "Ollama is not installed. Installing now..."
+    curl -fsSL https://ollama.com/install.sh | sh
+    if ! command -v ollama &>/dev/null; then
+        fail "Ollama installation failed."
+        echo "    Install it manually: https://ollama.com/download/linux"
+        exit 1
+    fi
+    pass "Ollama installed"
+else
+    pass "Ollama is installed"
 fi
-pass "Ollama is installed"
 
 if ! ollama list &>/dev/null; then
-    fail "Ollama is not running."
-    echo "    Start it with:  sudo systemctl start ollama"
-    exit 1
+    info "Starting Ollama..."
+    sudo systemctl start ollama
+    sleep 2
+    if ! ollama list &>/dev/null; then
+        fail "Could not start Ollama."
+        echo "    Try manually:  sudo systemctl start ollama"
+        exit 1
+    fi
+    pass "Ollama started"
+else
+    pass "Ollama is running"
 fi
-pass "Ollama is running"
 
 if ! command -v python3 &>/dev/null; then
     fail "Python 3 is not installed."
@@ -61,7 +73,8 @@ pass "Python 3 is installed ($PY_VERSION)"
 VENV_PKG="python${PY_VERSION}-venv"
 if ! python3 -c "import venv" &>/dev/null; then
     info "Installing $VENV_PKG (requires sudo)..."
-    sudo apt-get install -y "$VENV_PKG" > /dev/null 2>&1
+    sudo apt-get update -qq > /dev/null 2>&1
+    sudo apt-get install -y "$VENV_PKG" 2>&1 | tail -1
     if ! python3 -c "import venv" &>/dev/null; then
         fail "Could not install $VENV_PKG automatically."
         echo "    Install it manually with:  sudo apt install $VENV_PKG"
