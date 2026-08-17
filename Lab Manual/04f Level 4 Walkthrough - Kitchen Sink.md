@@ -17,6 +17,8 @@ maxLevel: 3
 
 ## The Challenge
 
+NOTE! This one is HARD on purpose. The LLM we're using is particularly difficult to bypass even with the heightened temperature and configuration I gave it to try and make this solvable during the workshop. Keep trying with everything you've learned. Consider working with another AI agent to solve it after the workshop is over.
+
 Level 4 throws everything at you:
 
 - **Identity lock:** The model is SecurityBot. It refuses any attempt to make it adopt another persona: "act as," "pretend to be," "roleplay as," "imagine you are" are all blocked.
