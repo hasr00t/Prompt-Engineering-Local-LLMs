@@ -27,7 +27,22 @@ Over four hours, you developed a practical prompt engineering toolkit for securi
 
 ## Where to Go Next
 
-**Practice the eval cases.** The `prompt-eng-cyber-evals` directory on the VM contains 24 evaluation cases spanning finding writing, config review, detection engineering, log analysis, threat analysis, exploit precondition analysis, and documentation. Each case has a rubric. Pick cases that match your day-to-day work and use them to sharpen your prompts.
+**Practice the eval cases.** The `prompt-eng-cyber-evals` directory on the VM contains 25 evaluation cases spanning finding writing, config review, detection engineering, log analysis, threat analysis, exploit precondition analysis, and documentation. Each case has a rubric and documented failure modes. Here are some good starting points by role:
+
+| Your Role | Start With | Difficulty |
+|-----------|-----------|------------|
+| Pentester | Case 01 (SMB signing finding) | Easy |
+| Pentester | Case 02 (version banner backport) | Medium |
+| Pentester | Case 22 (reusable Nessus-to-finding skill) | Hard |
+| SOC / Blue team | Case 10 (failed logons: spray vs brute force) | Easy |
+| SOC / Blue team | Case 11 (web attack amid scanner noise) | Medium |
+| SOC / Blue team | Case 25 (reusable alert-to-ticket skill) | Hard |
+| Detection engineer | Case 07 (Sigma rule for persistence) | Medium |
+| Detection engineer | Case 08 (tuning a noisy rule) | Medium |
+| Report writer | Case 18 (executive summary) | Easy |
+| Report writer | Case 21 (few-shot house style) | Medium |
+
+Pick cases that match your day-to-day work and use them to sharpen your prompts. The full index is in `prompt-eng-cyber-evals/README.md`.
 
 **Build more skills.** Every time you spend more than 10 minutes iterating on a prompt for a recurring task, stop and ask: should this be a Modelfile? Report section templates, methodology checklists, config review rubrics, triage playbooks. If you've done the work to get good output once, package it.
 
@@ -67,8 +82,8 @@ Over four hours, you developed a practical prompt engineering toolkit for securi
 
 ### Tools
 
-- [Ollama](https://ollama.com/) — Local LLM runtime
-- [Gandalf by Lakera](https://gandalf.lakera.ai/baseline) — Prompt injection challenge
+- [Ollama](https://ollama.com/): Local LLM runtime
+- [Gandalf by Lakera](https://gandalf.lakera.ai/baseline): Prompt injection challenge
 - [Uncensored Models on HuggingFace](https://huggingface.co/models?search=uncensored)
 - [HuggingFace Context Engineering Course](https://huggingface.co/learn/context-course/en/unit0/introduction)
 

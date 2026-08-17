@@ -544,6 +544,14 @@ This is what a **skill** is in practice: a reusable, structured package of knowl
 > - [ ] You scored each output using the rubric and identified the weakest criterion
 > - [ ] You iterated on the Modelfile at least once and re-tested
 
+> [!tip] Practice Cases
+> The `prompt-eng-cyber-evals/cases/` directory has formal evaluation cases with detailed rubrics for this exact exercise:
+>
+> - **Case 22** (Hard): Build a reusable Nessus-to-finding skill and test it against three inputs (red path)
+> - **Case 25** (Hard): Build a reusable alert-to-ticket skill and test it against three inputs (blue path)
+>
+> These cases have more detailed rubrics and common failure modes documented. Good for testing your skill after the workshop, or for comparing your approach with a teammate's.
+
 ---
 
 > [!nav]

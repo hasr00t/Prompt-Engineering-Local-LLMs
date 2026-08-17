@@ -13,7 +13,7 @@ maxLevel: 3
 
 # Lab: Building Strong Prompts
 
-This lab has two exercises. In the first, you'll write a professional penetration test finding starting with a terrible prompt and iterating until the output is something you'd actually want to deliver to a client. In the second, you'll choose your own path: generate proof-of-concept exploit code (red team) or Splunk detection alerts (blue team) for the same vulnerability.
+This lab has two exercises. In the first, you'll write a professional pentest finding, starting with a terrible prompt and iterating until the output is something you'd actually deliver to a client. In the second, you'll choose your own path: generate proof-of-concept exploit code (red team) or Splunk detection alerts (blue team) for the same vulnerability.
 
 Both exercises use CVE-2026-24061 and the artifacts you reviewed in [[01 Getting Started]].
 
@@ -31,14 +31,14 @@ Start with the worst prompt you can think of. Open an interactive session and ty
 > >>> Write a finding about CVE-2026-24061
 > ```
 
-Read the output, don't fix it yet, you're looking for two categories of problems:
+Read the output carefully. Don't fix it yet. Study it. You're looking for two categories of problems:
 
 **Structural problems:**
 - Is the finding organized the way your firm's deliverables are?
 - Does it have the sections a client needs (title, severity, description, impact, evidence, remediation)?
-- Is the severity justified or just stated?
+- Is severity justified or just stated?
 
-**AI tells — the words that scream "a robot wrote this":**
+**AI tells, the words that scream "a robot wrote this":**
 Look for these specific patterns from the talk:
 - Em dashes everywhere (—)
 - "Crucial," "robust," "comprehensive," "critical importance"
@@ -46,7 +46,9 @@ Look for these specific patterns from the talk:
 - Hedging language: "It should be noted that," "It is worth mentioning"
 - Puffed-up significance: "represents a significant threat to the security landscape"
 - Generic advice that adds no value: "organizations should prioritize security"
-- Wording that is doomsday-ish or my personal favorite... "here's the smoking gun"
+
+> [!tip] Keep Count
+> Count the AI tells in the output. Write the number down. You'll compare it to your refined output later.
 
 ### Step 2: Add Role
 
@@ -58,7 +60,7 @@ Exit the session (`/bye`) and start a new one. This time, give the model a role:
 > >>> You are a senior penetration tester writing findings for a client deliverable. Write a finding about CVE-2026-24061.
 > ```
 
-Compare this output to your first attempt. What changed? The model now has a perspective — it knows who it is and who it's writing for. But it still doesn't know anything about *your* engagement.
+Compare this output to your first attempt. What changed? The model now has a perspective. It knows who it is and who it's writing for. But it still doesn't know anything about *your* engagement.
 
 ### Step 3: Add Context
 
@@ -69,7 +71,7 @@ Now feed it the actual engagement data. Copy the content from your artifact file
 > ollama run llama3.2
 > ```
 
-This time, build a prompt with context. Here's a template — paste in the actual content from your artifact files where indicated:
+This time, build a prompt with context. Here's a template. Paste in the actual content from your artifact files where indicated:
 
 ```
 You are a senior penetration tester writing a finding for a client deliverable.
@@ -117,8 +119,6 @@ Write a finding using this exact format:
 **Evidence:** [What the scanner found — quote the relevant output]
 **Remediation:** [Specific, actionable steps — not generic advice]
 **References:** [CVE number and relevant links]
-
-Before producing the final output, read over it for clarity, correctness, and grammar mistakes.
 ```
 
 ### Step 5: Compare Before and After
@@ -145,7 +145,7 @@ The difference is the prompt, not the model. The same LLM produced both outputs.
 
 ## Exercise B: Choose Your Path
 
-Pick **one** of the two exercises below based on your role. Red teamers and pentesters will want to go with creating exploit code. Blue teamers and detection engineers may want to create Splunk alerts. If you finish early, try the other one.
+Pick **one** of the two exercises below based on your role. Red teamers and pentesters: go with the exploit code. Blue teamers and detection engineers: go with the Splunk alerts. If you finish early, try the other one.
 
 ### Red Path: Proof-of-Concept Exploit Code
 
@@ -183,15 +183,13 @@ Requirements:
 - Include inline comments explaining each step of the telnet 
   protocol negotiation
 - Handle connection errors gracefully
-- Include a timeout
 - Print the server's response after authentication bypass
 ```
 
-**Repeat on:**
+**Iterate on:**
 - Does the telnet protocol negotiation look correct? Ask the model to walk you through it.
 - Are the telnet option codes right? (IAC=0xff, WILL=0xfb, SB=0xfa, SE=0xf0, NEW_ENVIRON=0x27)
 - Does the script handle the case where the host isn't vulnerable?
-- Is there anything else YOU think the script should do or needs to do in the environment you're going to execute it in?
 
 > [!note]
 > A small local model may not produce a perfectly working exploit on the first try. That's fine. The lab is about prompt iteration, not about having a working 0-day at the end. Focus on how much better the output gets as you refine the prompt.
@@ -204,8 +202,8 @@ Your goal: prompt the LLM to generate Splunk SPL queries that detect exploitatio
 
 **What to detect:** 
 1. Telnet connections to port 23 with suspicious `NEW_ENVIRON` options containing `-f` 
-2. Authentication log anomalies — root login events via telnetd with no password authentication
-3. Correlation — telnet session followed by privileged commands within a time window
+2. Authentication log anomalies: root login events via telnetd with no password authentication
+3. Correlation: telnet session followed by privileged commands within a time window
 
 Start with a prompt and iterate:
 
@@ -265,6 +263,16 @@ For each query, include:
 > - [ ] You iterated through role, context, and constraints to produce a professional finding
 > - [ ] The final finding is structured, specific to the engagement, and reads like a human wrote it
 > - [ ] You completed at least one Exercise B path (red or blue) and iterated on the output at least once
+
+> [!tip] Practice Cases
+> Want more reps? The `prompt-eng-cyber-evals/cases/` directory has evaluation cases with rubrics you can use to keep practicing. Try these, sorted by difficulty:
+>
+> - **Case 01** (Easy): Write a finding for SMB signing not required on an internal host
+> - **Case 02** (Medium): Handle a version banner finding with a possible vendor backport
+> - **Case 03** (Hard): A "decommissioned" host that's still responding on the network
+> - **Case 21** (Medium): Use few-shot prompting to match a firm's house finding style
+>
+> Each case has a scoring rubric. Run your prompt, score the output, revise, and re-score.
 
 ---
 
