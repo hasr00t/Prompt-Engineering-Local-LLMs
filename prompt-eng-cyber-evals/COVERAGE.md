@@ -1,6 +1,6 @@
 # Prompt-Engineering Skill Coverage Matrix
 
-This matrix maps the 24 evaluation cases against the twelve prompt-engineering skills taught in the workshop. It identifies which skills are well exercised and which are thin. Cases 01–20 are the core set; cases 21–24 were added specifically to close coverage gaps found in the core set (see "Gap analysis" below).
+This matrix maps the 24 evaluation cases against the twelve prompt-engineering skills taught in the workshop. It identifies which skills are well exercised and which are thin. Cases 01-20 are the core set; cases 21-25 were added specifically to close coverage gaps found in the core set (see "Gap analysis" below).
 
 Legend: **●** = primary skill the case is designed to exercise · **○** = secondary skill the case also touches · blank = not meaningfully exercised.
 
@@ -32,7 +32,8 @@ Legend: **●** = primary skill the case is designed to exercise · **○** = se
 | 22 | Reusable Nessus skill | | ○ | ○ | ● | ● | | ● | ● | | | | ● |
 | 23 | Structured JSON triage | | | | ● | | | ○ | ● | ○ | | ● | |
 | 24 | Role-conditioned dual output | ● | ○ | ● | ● | | | | ● | | | | |
-| **Totals (● / ● + ○)** | | **3 / 7** | **4 / 10** | **8 / 13** | **9 / 13** | **2 / 6** | **4 / 7** | **7 / 12** | **17 / 19** | **12 / 16** | **10 / 11** | **4 / 8** | **1 / 1** |
+| 25 | Reusable alert responder | | ○ | ○ | ● | ● | | ● | ● | ● | | | ● |
+| **Totals (● / ● + ○)** | | **3 / 7** | **4 / 11** | **8 / 14** | **10 / 14** | **3 / 7** | **4 / 7** | **8 / 13** | **18 / 20** | **13 / 17** | **10 / 11** | **4 / 8** | **2 / 2** |
 
 ## Gap analysis (core set, cases 01–20)
 
@@ -55,7 +56,7 @@ The primary counts below describe the **core 20 cases**, which is what motivated
 
 ## The added cases (21–24)
 
-These four cases (now written and included in [`cases/`](cases/)) close the gaps above while staying inside the existing categories and design principles (missing info, contradiction, noise, insufficient-evidence).
+These five cases (now written and included in [`cases/`](cases/)) close the gaps above while staying inside the existing categories and design principles (missing info, contradiction, noise, insufficient-evidence).
 
 ### Case 21 — Few-shot: match the house finding style
 - **Category:** Finding writing · **Difficulty:** Medium
@@ -89,13 +90,21 @@ These four cases (now written and included in [`cases/`](cases/)) close the gaps
 - **Why it fills the gap:** Isolates role prompting as the decisive variable — the *facts must be identical* across both outputs while register, depth, and emphasis change. Rubric penalizes any case where the technical detail leaks into the exec version, where the exec framing drops a material fact, or where either version resolves the genuine unknown.
 - **Stretch:** Add a third role (legal/breach-counsel) with different constraints (what may/may not be asserted before confirmation), testing constraint-adherence under role.
 
-## Coverage after adding 21–24
+### Case 25 — Reusable Skill: an alert-to-ticket responder
+- **Category:** Log analysis / SOC operations - **Difficulty:** Hard
+- **Gap filled:** Reusable Skills (primary), Few-shot, Constraints, Verification, Hallucination resistance, Evidence-based reasoning.
+- **Input:** Three heterogeneous SIEM alerts: one clear true positive (CVE-2026-24061 exploitation with data exfiltration), one ambiguous (failed SSH logins from a known vendor's IP outside normal hours), and one context-dependent (internet-facing telnet on a host controlling building HVAC).
+- **Task:** Author **one reusable prompt/skill** (with fixed instructions, constraints, and output template) that converts any SIEM alert into a structured investigation ticket response, then run it unchanged against all three inputs.
+- **Why it fills the gap:** The blue-team counterpart to Case 22. Forces the student to design for generality across alert types, not a single investigation. The skill is graded on whether the same prompt handles a confirmed compromise, an ambiguous vendor situation, and a context-dependent exposure correctly, without per-input adjustment.
+- **Stretch:** Hand the finished skill a raw Nessus plugin finding instead of a SIEM alert and score whether it degrades gracefully or hallucinates.
 
-| Skill | Primary in core (01–20) | Primary in full set (01–24) |
+## Coverage after adding 21-25
+
+| Skill | Primary in core (01-20) | Primary in full set (01-25) |
 |---|:--:|:--:|
 | Role prompting | 2 | 3 |
-| Few-shot prompting | 0 | 2 |
+| Few-shot prompting | 0 | 3 |
 | Structured outputs | 3 | 4 |
-| Reusable Skills | 0 | 1 |
+| Reusable Skills | 0 | 2 |
 
-All twelve skills are now exercised as a primary focus in at least one case, with the three foundational skills (hallucination resistance, evidence-based reasoning, adversarial robustness) remaining the most heavily reinforced — which is appropriate for a security-reasoning curriculum.
+All twelve skills are now exercised as a primary focus in at least one case, with the three foundational skills (hallucination resistance, evidence-based reasoning, adversarial robustness) remaining the most heavily reinforced, which is appropriate for a security-reasoning curriculum.

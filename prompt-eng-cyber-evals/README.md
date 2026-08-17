@@ -1,6 +1,6 @@
 # Prompt Engineering for Cyber Security — Evaluation Dataset
 
-A collection of 24 hands-on evaluation cases for the **Prompt Engineering for Cyber Security** workshop. Each case is a self-contained Markdown file under [`cases/`](cases/).
+A collection of 25 hands-on evaluation cases for the **Prompt Engineering for Cyber Security** workshop. Each case is a self-contained Markdown file under [`cases/`](cases/).
 
 ## Purpose
 
@@ -58,10 +58,11 @@ Cases 01–20 are the core set (7 categories). Cases 21–24 were added to balan
 | 22 | Documentation and reporting | Reusable Nessus-to-finding skill | Hard | [case-22](cases/case-22-reusable-nessus-skill.md) |
 | 23 | Detection engineering / Log analysis | Structured JSON output for a triage pipeline | Medium | [case-23](cases/case-23-structured-json-triage.md) |
 | 24 | Threat analysis / Reporting | Role-conditioned dual output | Medium | [case-24](cases/case-24-role-dual-output.md) |
+| 25 | Log analysis / SOC operations | Reusable alert-to-ticket responder | Hard | [case-25](cases/case-25-reusable-alert-responder.md) |
 
 ## Files
 
-- [`cases/`](cases/) — the 24 evaluation cases, one Markdown file per case (`case-NN-slug.md`).
+- [`cases/`](cases/) — the 25 evaluation cases, one Markdown file per case (`case-NN-slug.md`).
 - [`COVERAGE.md`](COVERAGE.md) — prompt-engineering skill coverage matrix and gap analysis across all 24 cases.
 
 ## Design principles baked into the dataset
