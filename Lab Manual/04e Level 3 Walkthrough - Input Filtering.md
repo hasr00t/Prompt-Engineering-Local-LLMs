@@ -17,6 +17,8 @@ maxLevel: 3
 
 ## The Challenge
 
+NOTE! This one is HARD on purpose. The LLM we're using is particularly difficult to bypass even with the heightened temperature and configuration I gave it to try and make this solvable during the workshop. Keep trying with everything you've learned. Consider working with another AI agent to solve it after the workshop is over.
+
 Level 3 adds two layers on top of the basic defense:
 
 - **Input keyword blocklist:** Messages containing any of these words trigger a canned refusal: *password, secret, ignore, pretend, reveal*
