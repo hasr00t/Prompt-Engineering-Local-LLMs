@@ -21,7 +21,7 @@ Each technique is listed with what problem it solves, how to use it, a cybersecu
 
 ## The Prompt Contract
 
-This is the foundation. Every good prompt answers five questions for the model.
+The foundation. Every good prompt answers five questions for the model.
 
 | Element | What It Does | Example |
 |---------|-------------|---------|
@@ -31,7 +31,7 @@ This is the foundation. Every good prompt answers five questions for the model.
 | **Constraints** | Tells the model what NOT to do | "Never invent CVEs not in the evidence. No em dashes, no marketing language." |
 | **Output Shape** | Specifies the exact format | "Return: Title, Severity (with justification), Affected Hosts, Description, Impact, Evidence, Remediation." |
 
-The time you take filling in these five fields will save you tokens and time spent re-rolling.
+Thirty seconds filling in these five fields saves ten minutes of re-rolling.
 
 ---
 
@@ -147,6 +147,35 @@ Now you can see the reasoning. If the severity is wrong, you can identify exactl
 **When to use:** Any judgment call. Severity ratings, triage decisions, exploit feasibility, detection logic.
 
 **Tradeoff:** Adds length to the output. On CPU-based local models, that means more wait time.
+
+---
+
+## Tree of Thought
+
+**Problem:** Reasoning scaffolding follows one path. If that path starts wrong, the conclusion is wrong. Tree of Thought explores multiple paths and compares them.
+
+**How:** Ask the model to generate several independent approaches, evaluate each one, and select the strongest.
+
+**Example:**
+
+> [!vm] Lab VM
+> ```
+> I need to detect exploitation of CVE-2026-24061 in our environment.
+>
+> Propose three different detection approaches. For each one:
+> 1. Describe the data source and detection logic.
+> 2. Identify what it would catch and what it would miss.
+> 3. Rate its feasibility given standard enterprise logging.
+>
+> Then recommend which approach (or combination) to implement
+> first and explain why.
+> ```
+
+The model explores network-based detection, auth log analysis, and endpoint telemetry as separate branches, compares coverage and blind spots, and recommends based on the tradeoffs.
+
+**When to use:** Design decisions with multiple valid approaches. Detection strategy, remediation planning, architecture choices, investigation methodology. Any task where you want the model to compare options rather than commit to the first idea.
+
+**Tradeoff:** Produces longer output. Works best when you constrain the number of branches (three is usually enough) and require a final recommendation so you get a decision, not just a list.
 
 ---
 
@@ -364,6 +393,7 @@ If all three agree, confidence goes up. If they disagree, you've found ambiguity
 | **Prompt Chaining** | Multi-task prompts produce mediocre results | Multi-step deliverables | Slower, more prompts |
 | **Plan-Execute** | Context pollution from planning | Projects bigger than a one-shot | Requires discipline to split sessions |
 | **Reasoning Scaffolding** | Model skips steps, wrong conclusions | Judgment calls, severity ratings | Longer output, more wait time on CPU |
+| **Tree of Thought** | Single path commits to wrong answer early | Design decisions, detection strategy | Longer output, constrain to 3 branches |
 | **Meta Prompting** | Blank-page problem | Designing new skills and system prompts | Output is a draft, not a finished prompt |
 | **Delimited Structure** | Model confuses instructions with data | Long prompts, untrusted input | Adds boilerplate |
 | **Grounded Prompting** | Hallucinated facts, invented evidence | Accuracy-critical tasks | May be overly conservative |
