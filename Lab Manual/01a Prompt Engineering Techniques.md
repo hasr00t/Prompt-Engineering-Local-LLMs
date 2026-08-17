@@ -21,7 +21,7 @@ Each technique is listed with what problem it solves, how to use it, a cybersecu
 
 ## The Prompt Contract
 
-The foundation. Every good prompt answers five questions for the model.
+This is the foundation. Every good prompt answers five questions for the model.
 
 | Element | What It Does | Example |
 |---------|-------------|---------|
@@ -31,7 +31,7 @@ The foundation. Every good prompt answers five questions for the model.
 | **Constraints** | Tells the model what NOT to do | "Never invent CVEs not in the evidence. No em dashes, no marketing language." |
 | **Output Shape** | Specifies the exact format | "Return: Title, Severity (with justification), Affected Hosts, Description, Impact, Evidence, Remediation." |
 
-Thirty seconds filling in these five fields saves ten minutes of re-rolling.
+The time you take filling in these five fields will save you tokens and time spent re-rolling.
 
 ---
 
