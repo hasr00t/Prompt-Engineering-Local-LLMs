@@ -123,4 +123,4 @@ You should see six models build successfully. Each one takes a second or two sin
 > [!nav]
 > [[00 About This Workshop]]
 >
-> [[02 Building Strong Prompts]]
+> [[01a Prompt Engineering Techniques]]
