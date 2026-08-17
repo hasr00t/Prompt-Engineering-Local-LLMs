@@ -72,7 +72,7 @@ pass "Python 3 is installed ($PY_VERSION)"
 
 info "Installing python3.14-venv (requires sudo)..."
 sudo apt-get update -qq > /dev/null 2>&1
-sudo apt install -y python3.14-venv > /dev/null 2>&1
+sudo apt install -y python3-venv > /dev/null 2>&1
 if ! python3 -c "import venv" &>/dev/null; then
     fail "Could not install python3.14-venv."
     echo "    Install it manually with:  sudo apt install python3.14-venv"
