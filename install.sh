@@ -74,7 +74,13 @@ VENV_PKG="python${PY_VERSION}-venv"
 if ! python3 -c "import venv" &>/dev/null; then
     info "Installing $VENV_PKG (requires sudo)..."
     sudo apt-get update -qq > /dev/null 2>&1
-    sudo apt-get install -y "$VENV_PKG" 2>&1 | tail -1
+    if ! sudo apt-get install -y "$VENV_PKG" > /dev/null 2>&1; then
+        info "$VENV_PKG not found in default repos, adding deadsnakes PPA..."
+        sudo apt-get install -y software-properties-common > /dev/null 2>&1
+        sudo add-apt-repository -y ppa:deadsnakes/ppa > /dev/null 2>&1
+        sudo apt-get update -qq > /dev/null 2>&1
+        sudo apt-get install -y "$VENV_PKG" 2>&1 | tail -1
+    fi
     if ! python3 -c "import venv" &>/dev/null; then
         fail "Could not install $VENV_PKG automatically."
         echo "    Install it manually with:  sudo apt install $VENV_PKG"
